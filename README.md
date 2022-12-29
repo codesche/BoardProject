@@ -8,7 +8,7 @@
 ![image](https://user-images.githubusercontent.com/110509654/209464571-2bbabb3d-717e-4f0e-91ab-e8715f7f8c48.png)
 
 ## **ERD**
-![image](https://user-images.githubusercontent.com/110509654/209901522-66e524f7-6113-443b-9743-8bf4d2cec29a.png)
+![image](https://user-images.githubusercontent.com/110509654/209921475-02d77874-8fec-401e-af9f-b293b3f8b0f9.png)
 
 - MEMBER : 회원 테이블
 - BORAD : 게시판 테이블 (Board -> BOARD)
