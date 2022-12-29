@@ -11,7 +11,7 @@
 ![image](https://user-images.githubusercontent.com/110509654/209901522-66e524f7-6113-443b-9743-8bf4d2cec29a.png)
 
 - MEMBER : 회원 테이블
-- BORAD : 게시판 테이블
+- BORAD : 게시판 테이블 (Board -> BOARD)
 
 ## 사용 기술 스택
 - **Language : Java, HTML, CSS, JavaScript**
