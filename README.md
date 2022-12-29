@@ -8,10 +8,10 @@
 ![image](https://user-images.githubusercontent.com/110509654/209464571-2bbabb3d-717e-4f0e-91ab-e8715f7f8c48.png)
 
 ## **ERD**
-![image](https://user-images.githubusercontent.com/110509654/209689305-ab897154-6734-4b11-a661-327c984c54b7.png)
+![image](https://user-images.githubusercontent.com/110509654/209901522-66e524f7-6113-443b-9743-8bf4d2cec29a.png)
 
 - MEMBER : 회원 테이블
-- Board : 게시판 테이블
+- BORAD : 게시판 테이블 (Board -> BOARD)
 
 ## 사용 기술 스택
 - **Language : Java, HTML, CSS, JavaScript**
