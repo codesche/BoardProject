@@ -8,4 +8,7 @@ import project.board.entity.Member;
 @Repository
 public interface MemberRepository extends JpaRepository<Member, String> {
     Optional<Member> findByEmailAuthKey(String emailAuthKey);
+
+    // 회원 존재 여부 테스트 위해 생성
+    Member findByUserId(String id);
 }
