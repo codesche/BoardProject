@@ -1,8 +1,9 @@
 package project.board.member.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import project.board.model.MemberInput;
 
-public interface MemberService {
+public interface MemberService extends UserDetailsService {
 
     /**
      * 회원 가입

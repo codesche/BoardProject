@@ -1,12 +1,13 @@
 package project.board.member.controller;
 
-import java.time.LocalDateTime;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.board.entity.Member;
@@ -22,6 +23,7 @@ public class MemberController {
     // 로그인
     @RequestMapping("/member/login")
     public String login() {
+
         return "member/login";
     }
 
@@ -44,6 +46,7 @@ public class MemberController {
         return "member/register_complete";
     }
 
+    // 메일 인증
     @GetMapping("/member/email-auth")
     public String emailAuth(Model model, HttpServletRequest request) {
 
@@ -54,6 +57,14 @@ public class MemberController {
         model.addAttribute("result", result);
 
         return "member/email_auth";
+    }
+
+    // 회원 정보
+    @GetMapping("/member/info")
+    public String memberInfo() {
+
+        return "member/info";
+
     }
 
 }
