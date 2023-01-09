@@ -2,13 +2,18 @@ package project.board.member.repository;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 import project.board.entity.Member;
 
-@Repository
+
 public interface MemberRepository extends JpaRepository<Member, String> {
     Optional<Member> findByEmailAuthKey(String emailAuthKey);
 
-    // 회원 존재 여부 테스트 위해 생성
-    Member findByUserId(String id);
+    Optional<Member> findByUserEmail(String email);
+
+    Optional<Member> findByResetPasswordKey(String resetPasswordKey);
+
+//    // 회원 존재 여부 테스트 위해 생성
+//    Member findByUserId(String id);
+
+
 }

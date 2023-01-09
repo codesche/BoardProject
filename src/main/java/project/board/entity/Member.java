@@ -32,7 +32,10 @@ public class Member {
     private boolean emailAuthYn;
     private String emailAuthKey;
     private LocalDateTime emailAuthDt;
-//    private String userStatus;                      // 계정 이용가능한 상태, 정지상태 여부 구분
+
+    // 패스워드 초기화 칼럼 추가 (2023-01-09)
+    private String resetPasswordKey;                // 패스워드 초기화
+    private LocalDateTime resetPasswordLimitDt;     // 패스워드 초기화 가능 날짜
 
 
 }
