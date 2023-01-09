@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import project.board.component.MailComponents;
 import project.board.entity.Member;
+import project.board.member.exception.MemberNotEmailAuthException;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
 import project.board.model.MemberInput;
@@ -98,10 +99,14 @@ public class MemberServiceImpl implements MemberService {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
 
+        Member member = optionalMember.get();
+
+        if (!member.isEmailAuthYn()) {
+            throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인 해주세요");
+        }
+
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-
-        Member member = optionalMember.get();
 
         return new User(member.getUserId(), member.getUserPassword(), grantedAuthorities);
     }
