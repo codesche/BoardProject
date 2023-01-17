@@ -24,7 +24,18 @@
   <title>게시판 화면</title>
 
   <style>
-      .
+    .search-form {
+      position: relative;
+      padding: 1px 0 1px 0;
+      text-align: right;
+    }
+
+    .search-form .total-count {
+      position: absolute;
+      left: 0; top: 0;
+      height: 20px;
+      float: left;
+    }
   </style>
 
 </head>
@@ -43,10 +54,11 @@
           <a class="nav-link" href="/">메인<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/board/bbs">게시판</a>
+          <a class="nav-link" href="/board/list">게시판</a>
         </li>
       </ul>
     </div>
+
     <ul class="dropdown">
       <br>
       <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
@@ -64,6 +76,22 @@
   </nav>
 
   <div class="container" style="padding-top: 110px; margin: auto">
+      <div class="search-form">
+          <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
+          <form class="form-inline justify-content-end" method="get">
+            <select name="searchType">
+                <option value="all">전체</option>
+                <option th:selected="${#strings.equals(param.searchType, 'title')}" value="title">제목</option>
+                <option th:selected="${#strings.equals(param.searchType, 'userId')}" value="userId">작성자</option>
+                <option th:selected="${#strings.equals(param.searchType, 'createDt')}" value="createDt">작성일</option>
+            </select>
+
+            <input th:value="${param.searchValue}" type="search" name="searchValue" placeholder="검색어 입력"/>
+            <button type="submit">검색</button>
+          </form>
+        </form>
+      </div>
+      <br/>
       <div class="row">
           <table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
               <thead>
@@ -75,19 +103,28 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>안녕하세요</td>
-                      <td>홍길동</td>
-                      <td>2023-01-09</td>
+                  <tr th:each="x : ${list}">
+                      <td th:text="${x.seq}">1</td>
+                      <td>
+                        <a th:href="'edit?postNumber=' + ${x.postNumber}" th:text="${x.title}"></a>
+                      </td>
+                      <td th:text="${x.userId}">codesche</td>
+                      <td th:text="${x.updateDt}">2023-01-09</td>
                   </tr>
               </tbody>
           </table>
+
           <!-- 오른쪽 정렬 -->
           <div class="col text-right" style="padding-right: inherit">
-            <a class="btn btn-primary" href="/write" role="button">글쓰기</a>
+            <a class="btn btn-primary" href="/board/write" role="button">글쓰기</a>
           </div>
       </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="pager" th:utext="${pager}"></li>
+        </ul>
+      </nav>
   </div>
 
 </body>
