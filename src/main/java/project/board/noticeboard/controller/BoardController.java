@@ -4,11 +4,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import project.board.common.BaseController;
 import project.board.noticeboard.dto.BoardDTO;
 import project.board.noticeboard.model.BoardInput;
@@ -98,6 +99,21 @@ public class BoardController extends BaseController {
 
         return "redirect:/board/list";
     }
+
+    /**
+     * 게시글 상세 조회
+     */
+//    @GetMapping("/board/detail")
+//    public String detail(Model model, BoardParam parameter) {
+//
+//        parameter.init();
+//
+//        BoardDTO board = boardService.detail(parameter.getPostNumber());
+//        model.addAttribute("board", board);
+//
+//        return "board/detail";
+//
+//    }
 
 
 }

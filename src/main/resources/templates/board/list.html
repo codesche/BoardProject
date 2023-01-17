@@ -36,6 +36,12 @@
       height: 20px;
       float: left;
     }
+
+    .pager a.on {
+      font-weight: bold;
+      color: red;
+    }
+
   </style>
 
 </head>
@@ -83,7 +89,7 @@
                 <option value="all">전체</option>
                 <option th:selected="${#strings.equals(param.searchType, 'title')}" value="title">제목</option>
                 <option th:selected="${#strings.equals(param.searchType, 'userId')}" value="userId">작성자</option>
-                <option th:selected="${#strings.equals(param.searchType, 'createDt')}" value="createDt">작성일</option>
+                <option th:selected="${#strings.equals(param.searchType, 'updateDt')}" value="updateDt">작성일</option>
             </select>
 
             <input th:value="${param.searchValue}" type="search" name="searchValue" placeholder="검색어 입력"/>

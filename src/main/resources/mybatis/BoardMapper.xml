@@ -14,7 +14,7 @@
                 and title like concat ('%' #{searchValue}, '%')
               </when>
               <when test="searchType == 'createDt'">
-                and create_dt like concat ('%' #{searchValue}, '%')
+                and update_dt like concat ('%' #{searchValue}, '%')
               </when>
               <otherwise>
                   and
@@ -23,7 +23,7 @@
                   or
                   title like concat ('%' #{searchValue}, '%')
                   or
-                  create_dt like concat ('%' #{searchValue}, '%')
+                  update_dt like concat ('%' #{searchValue}, '%')
                   )
               </otherwise>
             </choose>

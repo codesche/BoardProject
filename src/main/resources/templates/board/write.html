@@ -31,11 +31,10 @@
               }
 
           });
+
         });
 
-        function updateAlarm() {
-            alert(" 해당 글을 수정하시겠습니까? ");
-        }
+
 
   </script>
 
@@ -92,30 +91,32 @@
             <tr>
               <td>
                 <input type="text" class="form-control" placeholder="제목을 입력해주세요"
-                         name="title" th:value="${detail.title}"
-                         maxlength="50" required>
+                       name="title" th:value="${detail.title}"
+                       maxlength="50" required>
               </td>
             </tr>
             <tr>
               <td>
                 <textarea type="text" class="form-control" placeholder="내용을 입력해주세요"
-                            name="content" th:text="${detail.content}" maxlength="2048"
-                            style="height: 350px;" required></textarea>
+                          name="content" th:text="${detail.content}" maxlength="2048"
+                          style="height: 350px;" required></textarea>
               </td>
             </tr>
             </tbody>
           </table>
           <div>
-            <input th:if="${!editMode}" type="submit" class="btn btn-primary" value="글 작성">
-            <input th:if="${!editMode}" type="button" class="btn btn-dark" value="목록으로">
-            <input th:if="${editMode}" type="submit" class="btn btn-primary" value="글 수정"
-                   onclick="updateAlarm()">
-            <input th:if="${editMode}" type="button" class="btn btn-dark" value="목록으로">
-
+            <form>
+              <input th:if="${!editMode}" type="submit"  class="btn btn-primary" value="글 작성">
+              <a th:if="${!editMode}" href="/board/list" class="btn btn-dark">목록으로</a>
+            </form>
+            <form name="updateForm" method="post">
+              <input th:if="${editMode}" type="submit"  class="btn btn-primary" value="글 수정">
+              <a th:if="${editMode}" href="/board/list" class="btn btn-dark">목록으로</a>
+            </form>
             <form name="deleteForm" method="post" action="/board/write/delete">
-                <input th:if="${editMode}" type="hidden" name="postNumber" th:value="${detail.postNumber}">
-                <input th:if="${editMode}" style="margin-top: -3px;"
-                       type="submit" class="btn btn-danger float-right" value="글 삭제">
+              <input th:if="${editMode}" type="hidden" name="postNumber" th:value="${detail.postNumber}">
+              <button th:if="${editMode}" style="margin-top: -40px;"
+                      type="submit" class="btn btn-danger float-right">글 삭제</button>
             </form>
           </div>
 
@@ -126,3 +127,5 @@
 
 </body>
 </html>
+
+
