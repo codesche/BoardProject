@@ -81,6 +81,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers(
             "/resources/**");
 
+        // 로그인 안 해도 메인화면 슬라이드 이미지 출력되도록 수정
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 
         super.configure(web);

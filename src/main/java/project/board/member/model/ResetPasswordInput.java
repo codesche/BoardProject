@@ -1,4 +1,4 @@
-package project.board.model;
+package project.board.member.model;
 
 import lombok.Data;
 import lombok.ToString;

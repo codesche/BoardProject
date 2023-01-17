@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.board.member.service.MemberService;
-import project.board.model.MemberInput;
-import project.board.model.ResetPasswordInput;
+import project.board.member.model.MemberInput;
+import project.board.member.model.ResetPasswordInput;
 
 @RequiredArgsConstructor
 @Controller

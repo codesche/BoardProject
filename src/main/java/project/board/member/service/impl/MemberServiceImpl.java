@@ -19,8 +19,8 @@ import project.board.entity.Member;
 import project.board.member.exception.MemberNotEmailAuthException;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
-import project.board.model.MemberInput;
-import project.board.model.ResetPasswordInput;
+import project.board.member.model.MemberInput;
+import project.board.member.model.ResetPasswordInput;
 
 @RequiredArgsConstructor
 @Service

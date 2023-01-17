@@ -1,8 +1,8 @@
 package project.board.member.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
-import project.board.model.MemberInput;
-import project.board.model.ResetPasswordInput;
+import project.board.member.model.MemberInput;
+import project.board.member.model.ResetPasswordInput;
 
 public interface MemberService extends UserDetailsService {
 
