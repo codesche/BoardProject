@@ -31,14 +31,11 @@ public class BoardDTO {
 
     public static BoardDTO of(Board board) {
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserDetails userDetails = (UserDetails)principal;
-
         return BoardDTO.builder()
                         .postNumber(board.getPostNumber())
                         .title(board.getTitle())
                         .content(board.getContent())
-                        .userId(userDetails.getUsername())
+                        .userId(board.getUserId())
                         .createDt(board.getCreateDt())
                         .updateDt(board.getUpdateDt())
                         .build();
