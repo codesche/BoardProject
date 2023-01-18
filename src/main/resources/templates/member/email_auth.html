@@ -24,14 +24,14 @@
 <body>
   <div class="jumbotron">
     <div th:if="${result eq true}">
-      <h1 class="display-4">회원 가입 활성화 완료</h1>
+      <h1 class="display-4">회원 가입 완료</h1>
       <p class="lead">회원님의 계정이 활성화 되었습니다.</p>
       <hr class="my-4">
       <a class="btn btn-primary btn-lg" href="/" role="button">메인으로 돌아가기</a>
     </div>
 
     <div th:if="${result eq false}">
-      <h1 class="display-4">회원 가입 활성화 실패</h1>
+      <h1 class="display-4">회원 가입 실패</h1>
       <p class="lead">회원님의 계정이 활성화에 실패하였습니다.</p>
       <hr class="my-4">
       <a class="btn btn-primary btn-lg" href="/" role="button">메인으로 돌아가기</a>
