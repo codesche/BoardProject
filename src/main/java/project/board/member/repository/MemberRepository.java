@@ -2,7 +2,7 @@ package project.board.member.repository;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import project.board.entity.Member;
+import project.board.member.entity.Member;
 
 
 public interface MemberRepository extends JpaRepository<Member, String> {
