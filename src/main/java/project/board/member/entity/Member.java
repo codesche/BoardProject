@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
-public class Member {
+public class Member implements MemberCode {
 
     @Id
     private String userId;
@@ -39,5 +39,8 @@ public class Member {
 
     // 관리자 승인 여부 칼럼 추가 (2023-01-18)
     private boolean adminYn;
+
+    // 회원 상태 칼럼 추가 (2023-01-18)
+    private String userStatus;                      // 이용가능한 상태, 정지상태, 탈퇴상태
 
 }
