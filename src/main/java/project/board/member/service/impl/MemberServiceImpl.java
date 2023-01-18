@@ -9,13 +9,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import project.board.admin.dto.MemberDTO;
+import project.board.admin.mapper.MemberMapper;
+import project.board.admin.model.MemberParam;
 import project.board.component.MailComponents;
-import project.board.entity.Member;
+import project.board.member.entity.Member;
 import project.board.member.exception.MemberNotEmailAuthException;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
@@ -30,6 +35,8 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
 
     private final MailComponents mailComponents;
+
+    private final MemberMapper memberMapper;
 
     /**
      * 회원 가입
@@ -70,6 +77,9 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /**
+     * 이메일 인증 통한 회원 활성화
+     */
     @Override
     public boolean emailAuth(String uuid) {
 
@@ -92,6 +102,9 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /**
+     * 패스워드 초기화
+     */
     @Override
     public boolean sendResetPassword(ResetPasswordInput parameter) {
         Optional<Member> optionalMember =
@@ -121,6 +134,9 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /**
+     * 비밀번호 초기화 요청
+     */
     @Override
     public boolean resetPassword(String uuid, String password) {
         Optional<Member> optionalMember = memberRepository.findByResetPasswordKey(uuid);
@@ -148,6 +164,9 @@ public class MemberServiceImpl implements MemberService {
         return true;
     }
 
+    /**
+     * 비밀번호 재설정 후 다시 확인
+     */
     @Override
     public boolean checkResetPassword(String uuid) {
         Optional<Member> optionalMember = memberRepository.findByResetPasswordKey(uuid);
@@ -170,6 +189,24 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public List<MemberDTO> list(MemberParam parameter) {
+
+        long totalCount = memberMapper.selectListCount(parameter);
+        List<MemberDTO> list = memberMapper.selectList(parameter);
+
+        if (!CollectionUtils.isEmpty(list)) {
+            int i = 0;
+            for (MemberDTO x : list) {
+                x.setTotalCount(totalCount);
+                x.setSeq(totalCount - parameter.getPageStart() - i);
+                i++;
+            }
+        }
+
+        return list;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info(username);
         Optional<Member> optionalMember = memberRepository.findById(username);
@@ -185,6 +222,11 @@ public class MemberServiceImpl implements MemberService {
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        // 관리자 ROLE 추가
+        if (member.isAdminYn()) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
 
         return new User(member.getUserId(), member.getUserPassword(), grantedAuthorities);
     }
