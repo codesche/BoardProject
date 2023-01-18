@@ -112,7 +112,7 @@
                   <tr th:each="x : ${list}">
                       <td th:text="${x.seq}">1</td>
                       <td>
-                        <a th:href="'edit?postNumber=' + ${x.postNumber}" th:text="${x.title}"></a>
+                        <a th:href="'detail?postNumber=' + ${x.postNumber}" th:text="${x.title}"></a>
                       </td>
                       <td th:text="${x.userId}">codesche</td>
                       <td th:text="${x.updateDt}">2023-01-09</td>

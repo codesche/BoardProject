@@ -103,17 +103,17 @@ public class BoardController extends BaseController {
     /**
      * 게시글 상세 조회
      */
-//    @GetMapping("/board/detail")
-//    public String detail(Model model, BoardParam parameter) {
-//
-//        parameter.init();
-//
-//        BoardDTO board = boardService.detail(parameter.getPostNumber());
-//        model.addAttribute("board", board);
-//
-//        return "board/detail";
-//
-//    }
+    @GetMapping("/board/detail")
+    public String detail(Model model, BoardParam parameter) {
+
+        parameter.init();
+
+        BoardDTO board = boardService.detail(parameter.getPostNumber());
+        model.addAttribute("board", board);
+
+        return "board/detail";
+
+    }
 
 
 }

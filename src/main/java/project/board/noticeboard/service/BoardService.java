@@ -29,6 +29,8 @@ public interface BoardService {
      */
     boolean del(long postNumber);
 
+    BoardDTO detail(Long postNumber);
+
     /**
      * 게시판 글 상세 정보
      */

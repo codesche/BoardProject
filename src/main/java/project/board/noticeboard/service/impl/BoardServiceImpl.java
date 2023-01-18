@@ -110,18 +110,18 @@ public class BoardServiceImpl implements BoardService {
         return true;
     }
 
-//    @Override
-//    public BoardDTO detail(Long postNumber) {
-//
-//        Optional<Board> optionalBoard = boardRepository.findById(postNumber);
-//        if (optionalBoard.isEmpty()) {
-//            return null;
-//        }
-//
-//        Board board = optionalBoard.get();
-//
-//        return BoardDTO.of(board);
-//    }
+    @Override
+    public BoardDTO detail(Long postNumber) {
+
+        Optional<Board> optionalBoard = boardRepository.findById(postNumber);
+        if (optionalBoard.isEmpty()) {
+            return null;
+        }
+
+        Board board = optionalBoard.get();
+
+        return BoardDTO.of(board);
+    }
 
 
 }
