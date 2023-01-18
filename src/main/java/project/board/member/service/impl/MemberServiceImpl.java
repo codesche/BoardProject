@@ -22,6 +22,7 @@ import project.board.admin.model.MemberParam;
 import project.board.component.MailComponents;
 import project.board.member.entity.Member;
 import project.board.member.exception.MemberNotEmailAuthException;
+import project.board.member.exception.MemberStopUserException;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
 import project.board.member.model.MemberInput;
@@ -64,6 +65,7 @@ public class MemberServiceImpl implements MemberService {
             .regDt(LocalDateTime.now())
             .emailAuthYn(false)
             .emailAuthKey(uuid)
+            .userStatus(Member.MEMBER_STATUS_REQ)
             .build();
 
         memberRepository.save(member);
@@ -95,6 +97,7 @@ public class MemberServiceImpl implements MemberService {
             return false;
         }
 
+        member.setUserStatus(Member.MEMBER_STATUS_ING);
         member.setEmailAuthYn(true);
         member.setEmailAuthDt(LocalDateTime.now());
         memberRepository.save(member);
@@ -220,14 +223,60 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public boolean updateStatus(String userId, String userStatus) {
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        member.setUserStatus(userStatus);
+        memberRepository.save(member);
+
+        return true;
+    }
+
+    @Override
+    public boolean updatePassword(String userId, String password) {
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        String encPassowrd = BCrypt.hashpw(password, BCrypt.gensalt());
+
+        member.setUserPassword(encPassowrd);
+        memberRepository.save(member);
+
+        return true;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info(username);
+
         Optional<Member> optionalMember = memberRepository.findById(username);
         if (!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
         }
 
         Member member = optionalMember.get();
+
+        if (Member.MEMBER_STATUS_REQ.equals(member.getUserStatus())) {
+            throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인을 해주세요.");
+        }
+
+        if (Member.MEMBER_STATUS_STOP.equals(member.getUserStatus())) {
+            throw new MemberStopUserException("정지된 회원 입니다.");
+        }
+
+        if (Member.MEMBER_STATUS_WITHDRAW.equals(member.getUserStatus())) {
+            throw new MemberStopUserException("탈퇴된 회원 입니다.");
+        }
+
 
         if (!member.isEmailAuthYn()) {
             throw new MemberNotEmailAuthException("이메일 활성화 이후에 로그인 해주세요");

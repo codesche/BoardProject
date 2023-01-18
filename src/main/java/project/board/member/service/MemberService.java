@@ -43,4 +43,16 @@ public interface MemberService extends UserDetailsService {
      * 회원 상세 정보
      */
     MemberDTO detail(String userId);
+
+    /**
+     *
+     * 회원 상태 변경
+     */
+    boolean updateStatus(String userId, String userStatus);
+
+    /**
+     * 회원 비밀번호 초기화
+     */
+    boolean updatePassword(String userId, String password);
+
 }

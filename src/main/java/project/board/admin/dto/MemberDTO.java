@@ -30,6 +30,7 @@ public class MemberDTO {
     private LocalDateTime resetPasswordLimitDt;
 
     private boolean adminYn;
+    private String userStatus;
 
     long totalCount;
     long seq;
@@ -48,6 +49,7 @@ public class MemberDTO {
             .resetPasswordKey(member.getResetPasswordKey())
             .resetPasswordLimitDt(member.getResetPasswordLimitDt())
             .adminYn(member.isAdminYn())
+            .userStatus(member.getUserStatus())
             .build();
     }
 

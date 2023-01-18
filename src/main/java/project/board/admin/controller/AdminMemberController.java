@@ -5,7 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import project.board.admin.dto.MemberDTO;
+import project.board.admin.model.MemberStatusInput;
 import project.board.admin.model.MemberParam;
 import project.board.common.BaseController;
 import project.board.member.service.MemberService;
@@ -48,5 +51,21 @@ public class AdminMemberController extends BaseController {
 
         return "admin/member/detail";
     }
+
+    @PostMapping("/admin/member/status")
+    public String status(Model model, MemberStatusInput parameter) {
+        boolean result = memberservice.updateStatus(parameter.getUserId(), parameter.getUserStatus());
+
+        return "redirect:/admin/member/detail?userId=" + parameter.getUserId();
+    }
+
+    @PostMapping("/admin/member/password")
+    public String password(MemberStatusInput parameter) {
+        boolean result = memberservice.updatePassword(parameter.getUserId(), parameter.getPassword());
+
+        return "redirect:/admin/member/detail?userId=" + parameter.getUserId();
+    }
+
+
 
 }

@@ -30,19 +30,17 @@
   <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>
 
   <div class="detail">
-    <div class="container" style="padding-top: 130px; padding-left: 230px;">
+    <div class="container" style="padding-top: 130px; padding-left: 200px; padding-right:100px;">
       <div class="row">
-        <form method="post" enctype="multipart/form-data">
-          <table class="table table-striped"
-                 style="text-align: center; border: 1px solid #dddddd;">
-            <thead>
-            <tr>
-              <th colspan="2" style="background-color: #eeeeee; width: 787px; margin-left: auto;
-                    margin-right: auto; text-align: center;">회원 상세 정보</th>
-
-            </tr>
-            </thead>
-            <tbody>
+        <table class="table table-striped"
+               style="text-align: center; border: 1px solid #dddddd;">
+          <thead>
+          <tr>
+            <th colspan="2" style="background-color: #eeeeee; width: 787px; margin-left: auto;
+                  margin-right: auto; text-align: center;">회원 상세 정보</th>
+          </tr>
+          </thead>
+          <tbody>
               <tr>
                 <td>아이디</td>
                 <td th:text="${member.userId}">아이디</td>
@@ -71,12 +69,42 @@
                 <td>가입일</td>
                 <td th:text="${member.regDtText}">가입일</td>
               </tr>
-            </tbody>
-          </table>
-          <div>
-            <a href="/board/list" class="btn btn-dark">목록으로</a>
-          </div>
-        </form>
+              <tr>
+                <td>회원 상태</td>
+                <td>
+                    <p>
+                        현재상태: <span th:text="${member.userStatus}"></span>
+                    </p>
+                    <div>
+                      <form method="post" action="/admin/member/status">
+                        <input type="hidden" name="userId" th:value="${member.userId}"/>
+                        <select name="userStatus">
+                            <option value="REQ">가입승인중</option>
+                            <option value="ING">정상이용중</option>
+                            <option value="STOP">정지중</option>
+                        </select>
+                        <button type="submit">상태 변경</button>
+                      </form>
+                    </div>
+                  </td>
+               </tr>
+               <tr>
+                 <td>비밀번호 초기화</td>
+                 <td>
+                    <div>
+                        <form method="post" action="/admin/member/password">
+                            <input th:value="${member.userId}" type="hidden" name="userId"/>
+                            <input type="text" name="password" placeholder="새 비밀번호를 입력"/>
+                            <button type="submit">비밀번호 초기화</button>
+                        </form>
+                    </div>
+                 </td>
+               </tr>
+          </tbody>
+        </table>
+        <div>
+          <a href="/board/list" class="btn btn-primary">목록으로</a>
+        </div>
       </div>
     </div>
   </div>
