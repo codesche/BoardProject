@@ -43,7 +43,7 @@
       select * from board
       where 1 = 1
             <include refid="selectListWhere"/>
-      order by create_dt desc
+      order by update_dt desc
 
       limit #{pageStart}, #{pageEnd}
   </select>
