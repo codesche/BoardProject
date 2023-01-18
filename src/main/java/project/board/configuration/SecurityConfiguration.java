@@ -43,8 +43,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 , "/member/register"
                 , "/member/email-auth"
                 , "/member/find/password"
-                , "/member/reset/password"
             ).permitAll();
+
+        http.authorizeRequests()
+                .antMatchers("/admin/**")
+                .hasAuthority("ROLE_ADMIN");
 
         http.authorizeRequests()
                 .mvcMatchers(
