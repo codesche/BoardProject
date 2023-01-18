@@ -11,5 +11,12 @@ public class MainController {
         return "index";
     }
 
+    // 에러 메시지 처리
+    @RequestMapping("/error/denied")
+    public String errorDenied() {
+
+        return "error/denied";
+    }
+
 
 }
