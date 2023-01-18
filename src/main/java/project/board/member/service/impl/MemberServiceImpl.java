@@ -62,8 +62,8 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         String email = parameter.getUserEmail();
-        String subject = "fastlms 사이트 가입을 축하드립니다. ";
-        String text = "<p>fastlms 사이트 가입을 축하드립니다.<p><p>아래 링크를 클릭하셔서 가입을 완료하세요.</p>"
+        String subject = "SpringBoot 게시판 사이트 가입을 축하드립니다. ";
+        String text = "<p>SpringBoot 게시판 사이트 가입을 축하드립니다.<p><p>아래 링크를 클릭하셔서 가입을 완료하세요.</p>"
             + "<div><a target='_blank' href='http://localhost:8080/member/email-auth?id=" + uuid + "'>가입 완료</a></div>";
         mailComponents.sendMail(email, subject, text);
 
@@ -110,8 +110,8 @@ public class MemberServiceImpl implements MemberService {
         memberRepository.save(member);
 
         String email = parameter.getUserEmail();
-        String subject = "[fastlms] 비밀번호 초기화 메일입니다. ";
-        String text = "<p>fastlms 비밀번호 초기화 메일입니다.<p>" +
+        String subject = "[SpringBoot 게시판] 비밀번호 초기화 메일입니다. ";
+        String text = "<p>SpringBoot 게시판 비밀번호 초기화 메일입니다.<p>" +
             "<p>아래 링크를 클릭하셔서 비밀번호를 초기화 해주세요.</p>"
             + "<div><a target='_blank' href='http://localhost:8080/member/reset/password?id="
             + uuid + "'>" +
