@@ -1,6 +1,7 @@
 package project.board.noticeboard.dto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -56,6 +57,15 @@ public class BoardDTO {
 
     }
 
+    public String getUpdateDtText() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        return updateDt != null ? this.updateDt.format(formatter) : "";
+    }
+
+    public String getCreateDtText() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        return createDt != null ? this.createDt.format(formatter) : "";
+    }
 
 
 }

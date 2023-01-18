@@ -52,7 +52,7 @@ public class MemberDTO {
     }
 
 
-    public String getRegDtText(LocalDateTime dateTime) {
+    public String getRegDtText() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         return regDt != null ? this.regDt.format(formatter) : "";
     }
