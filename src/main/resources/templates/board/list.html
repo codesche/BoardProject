@@ -85,14 +85,15 @@
       <div class="search-form">
           <p class="total-count">전체 <span th:text="${totalCount}"></span>개</p>
           <form class="form-inline justify-content-end" method="get">
-            <select name="searchType">
+            <select name="searchType" style="margin-right: 10px;">
                 <option value="all">전체</option>
                 <option th:selected="${#strings.equals(param.searchType, 'title')}" value="title">제목</option>
                 <option th:selected="${#strings.equals(param.searchType, 'userId')}" value="userId">작성자</option>
                 <option th:selected="${#strings.equals(param.searchType, 'updateDt')}" value="updateDt">작성일</option>
             </select>
 
-            <input th:value="${param.searchValue}" type="search" name="searchValue" placeholder="검색어 입력"/>
+            <input th:value="${param.searchValue}" type="search" style="margin-right: 5px"
+                   name="searchValue" placeholder="검색어 입력"/>
             <button type="submit">검색</button>
           </form>
         </form>
