@@ -1,4 +1,4 @@
-package project.board.entity;
+package project.board.member.entity;
 
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
@@ -37,5 +37,7 @@ public class Member {
     private String resetPasswordKey;                // 패스워드 초기화
     private LocalDateTime resetPasswordLimitDt;     // 패스워드 초기화 가능 날짜
 
+    // 관리자 승인 여부 칼럼 추가 (2023-01-18)
+    private boolean adminYn;
 
 }
