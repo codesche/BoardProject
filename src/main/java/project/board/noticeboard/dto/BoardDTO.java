@@ -58,12 +58,12 @@ public class BoardDTO {
     }
 
     public String getUpdateDtText() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return updateDt != null ? this.updateDt.format(formatter) : "";
     }
 
     public String getCreateDtText() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return createDt != null ? this.createDt.format(formatter) : "";
     }
 
