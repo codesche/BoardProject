@@ -207,6 +207,19 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberDTO detail(String userId) {
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            return null;
+        }
+
+        Member member = optionalMember.get();
+
+        return MemberDTO.of(member);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info(username);
         Optional<Member> optionalMember = memberRepository.findById(username);

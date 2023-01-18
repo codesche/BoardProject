@@ -38,4 +38,15 @@ public class AdminMemberController extends BaseController {
 
     }
 
+    @GetMapping("/admin/member/detail")
+    public String detail(Model model, MemberParam parameter) {
+
+        parameter.init();
+
+        MemberDTO member = memberservice.detail(parameter.getUserId());
+        model.addAttribute("member", member);
+
+        return "admin/member/detail";
+    }
+
 }

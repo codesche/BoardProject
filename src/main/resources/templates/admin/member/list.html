@@ -55,9 +55,10 @@
           <form class="form-inline justify-content-end" method="get">
             <select name="searchType" style="margin-right: 10px;">
                 <option value="all">전체</option>
-                <option th:selected="${#strings.equals(param.searchType, 'title')}" value="title">제목</option>
-                <option th:selected="${#strings.equals(param.searchType, 'userId')}" value="userId">작성자</option>
-                <option th:selected="${#strings.equals(param.searchType, 'updateDt')}" value="updateDt">작성일</option>
+                <option th:selected="${#strings.equals(param.searchType, 'userId')}" value="userId">아이디</option>
+                <option th:selected="${#strings.equals(param.searchType, 'userName')}" value="userName">이름</option>
+                <option th:selected="${#strings.equals(param.searchType, 'userGender')}" value="userGender">성별</option>
+                <option th:selected="${#strings.equals(param.searchType, 'phone')}" value="phone">연락처</option>
             </select>
 
             <input th:value="${param.searchValue}" type="search" style="margin-right: 5px"
@@ -84,9 +85,12 @@
               <tbody>
                   <tr th:each="x : ${list}">
                       <td th:text="${x.seq}">1</td>
-                      <td th:text="${x.userId}">codesche</td>
+                      <td>
+                          <a th:text="${x.userId}"
+                             th:href="${'detail?userId=' + x.userId}"></a>
+                      </td>
                       <td th:text="${x.userName}">홍길동</td>
-                      <td th:text="${x.userGender}">male</td>
+                      <td th:text="${x.userGender}">남</td>
                       <td th:text="${x.phone}">010-1234-5678</td>
                       <td>
                           <p th:if="${x.emailAuthYn}">Y</p>

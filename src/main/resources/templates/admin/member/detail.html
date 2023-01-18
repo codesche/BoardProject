@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="starter-template.css" rel="stylesheet">
+  <link href="custom.css" rel="stylesheet">
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+          crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+          crossorigin="anonymous"></script>
+
+  <title>관리자 화면</title>
+
+</head>
+
+<body>
+
+  <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>
+
+  <div class="detail">
+    <div class="container" style="padding-top: 130px; padding-left: 230px;">
+      <div class="row">
+        <form method="post" enctype="multipart/form-data">
+          <table class="table table-striped"
+                 style="text-align: center; border: 1px solid #dddddd;">
+            <thead>
+            <tr>
+              <th colspan="2" style="background-color: #eeeeee; width: 787px; margin-left: auto;
+                    margin-right: auto; text-align: center;">회원 상세 정보</th>
+
+            </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>아이디</td>
+                <td th:text="${member.userId}">아이디</td>
+              </tr>
+              <tr>
+                <td>이름</td>
+                <td th:text="${member.userName}">이름</td>
+              </tr>
+              <tr>
+                <td>성별</td>
+                <td th:text="${member.userGender}">성별</td>
+              </tr>
+              <tr>
+                <td>연락처</td>
+                <td th:text="${member.phone}">연락처</td>
+              </tr>
+              <tr>
+                <td>이메일 인증</td>
+                <td th:text="${member.emailAuthYn}"></td>
+              </tr>
+              <tr>
+                <td>관리자 여부</td>
+                <td th:text="${member.adminYn}">연락처</td>
+              </tr>
+              <tr>
+                <td>가입일</td>
+                <td th:text="${member.regDtText}">가입일</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <a href="/board/list" class="btn btn-dark">목록으로</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

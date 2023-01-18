@@ -13,6 +13,9 @@
               <when test="searchType == 'userName'">
                 and user_name like concat ('%' #{searchValue}, '%')
               </when>
+              <when test="searchType == 'userGender'">
+                and user_gender like concat ('%' #{searchValue}, '%')
+              </when>
               <when test="searchType == 'phone'">
                 and phone like concat ('%' #{searchValue}, '%')
               </when>
@@ -22,6 +25,8 @@
                   user_id like concat ('%' #{searchValue}, '%')
                   or
                   user_name like concat ('%' #{searchValue}, '%')
+                  or
+                  user_gender like concat ('%' #{searchValue}, '%')
                   or
                   phone like concat ('%' #{searchValue}, '%')
                   )
