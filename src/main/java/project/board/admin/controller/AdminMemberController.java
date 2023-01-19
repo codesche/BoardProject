@@ -31,7 +31,8 @@ public class AdminMemberController extends BaseController {
         }
 
         String queryString = parameter.getQueryString();
-        String pagerHtml = getPagerHtml(totalCount, parameter.getPageSize(), parameter.getPageIndex(), queryString);
+        String pagerHtml = getPagerHtml(totalCount, parameter.getPageSize(),
+            parameter.getPageIndex(), queryString);
 
         model.addAttribute("list", members);
         model.addAttribute("totalCount", totalCount);
