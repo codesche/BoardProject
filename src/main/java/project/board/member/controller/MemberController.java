@@ -1,6 +1,7 @@
 package project.board.member.controller;
 
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import project.board.admin.dto.MemberDTO;
+import project.board.admin.model.MemberParam;
+import project.board.common.BaseController;
 import project.board.member.model.ServiceResult;
 import project.board.member.service.MemberService;
 import project.board.member.model.MemberInput;
@@ -17,7 +20,7 @@ import project.board.member.model.ResetPasswordInput;
 
 @RequiredArgsConstructor
 @Controller
-public class MemberController {
+public class MemberController extends BaseController {
 
     private final MemberService memberService;
 
@@ -191,5 +194,30 @@ public class MemberController {
 
         return "redirect:/member/logout";
     }
+
+
+    @GetMapping("/member/list")
+    public String list(Model model, MemberParam memberParam) {
+
+        memberParam.init();
+        List<MemberDTO> members = memberService.list(memberParam);
+
+        long totalCount = 0;
+        if (members != null && members.size() > 0) {
+            totalCount = members.get(0).getTotalCount();
+        }
+
+        String queryString = memberParam.getQueryString();
+        String pagerHtml = getPagerHtml(totalCount, memberParam.getPageSize(),
+            memberParam.getPageIndex(), queryString);
+
+        model.addAttribute("list", members);
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("pager", pagerHtml);
+
+        return "member/list";
+
+    }
+
 
 }
