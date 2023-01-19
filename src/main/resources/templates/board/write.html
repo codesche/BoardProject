@@ -34,8 +34,12 @@
 
         });
 
+  </script>
 
-
+  <script>
+      function updateAlarm() {
+          alert("수정되었습니다.");
+      }
   </script>
 
 </head>
@@ -112,7 +116,7 @@
             </form>
 
             <!-- update -->
-            <input th:if="${editMode}" type="submit"  class="btn btn-primary" value="글 수정">
+            <input th:if="${editMode}" type="submit"  class="btn btn-primary" value="글 수정" onclick="updateAlarm()">
             <a th:if="${editMode}" href="/board/list" class="btn btn-dark">목록으로</a>
 
             <!-- delete -->
