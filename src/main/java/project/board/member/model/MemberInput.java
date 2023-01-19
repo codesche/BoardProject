@@ -14,4 +14,10 @@ public class MemberInput {
     private String userGender;
     private String userEmail;
 
+    private String newPassword;
+
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
+
 }
