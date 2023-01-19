@@ -107,6 +107,7 @@
                       <th style="background-color: #eeeeee; text-align: center;">제목</th>
                       <th style="background-color: #eeeeee; text-align: center;">작성자</th>
                       <th style="background-color: #eeeeee; text-align: center;">작성일</th>
+                      <th style="background-color: #eeeeee; text-align: center;">조회수</th>
                   </tr>
               </thead>
               <tbody>
@@ -117,6 +118,7 @@
                       </td>
                       <td th:text="${x.userId}">codesche</td>
                       <td th:text="${x.updateDtText}">2023-01-09</td>
+                      <td th:text="${x.countVisit}">조회수</td>
                   </tr>
               </tbody>
           </table>
