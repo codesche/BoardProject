@@ -58,7 +58,7 @@ public class BoardController extends BaseController {
             if (existBoard == null) {
                 // error 처리
                 model.addAttribute("message", "해당 게시글이 존재하지 않습니다.");
-                return "common/error";
+                return "error/denied";
             }
             detail = existBoard;
         }
@@ -80,7 +80,7 @@ public class BoardController extends BaseController {
             if (existBoard == null) {
                 // error 처리
                 model.addAttribute("message", "해당 게시글이 존재하지 않습니다.");
-                return "common/error";
+                return "error/denied";
             }
 
             boolean result = boardService.set(parameter);
