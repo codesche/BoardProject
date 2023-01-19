@@ -5,5 +5,4 @@ import project.board.noticeboard.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
-
 }
