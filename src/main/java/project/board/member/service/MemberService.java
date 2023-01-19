@@ -69,4 +69,5 @@ public interface MemberService extends UserDetailsService {
      * 회원 탈퇴
      */
     ServiceResult withdraw(String userId, String userPassword);
+
 }
