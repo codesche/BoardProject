@@ -22,6 +22,8 @@ public class MemberDTO {
     private String userEmail;
 
     private LocalDateTime regDt;
+    private LocalDateTime udtDt;
+
     private boolean emailAuthYn;
     private String emailAuthKey;
     private LocalDateTime emailAuthDt;
@@ -34,6 +36,10 @@ public class MemberDTO {
 
     long totalCount;
     long seq;
+
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
 
     public static MemberDTO of(Member member) {
         return MemberDTO.builder()
@@ -50,6 +56,12 @@ public class MemberDTO {
             .resetPasswordLimitDt(member.getResetPasswordLimitDt())
             .adminYn(member.isAdminYn())
             .userStatus(member.getUserStatus())
+            .udtDt(member.getUdtDt())
+
+            .zipcode(member.getZipcode())
+            .addr(member.getAddr())
+            .addrDetail(member.getAddrDetail())
+
             .build();
     }
 
@@ -57,6 +69,11 @@ public class MemberDTO {
     public String getRegDtText() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
         return regDt != null ? this.regDt.format(formatter) : "";
+    }
+
+    public String getUdtDtText() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return udtDt != null ? this.udtDt.format(formatter) : "";
     }
 
 
