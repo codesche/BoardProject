@@ -43,4 +43,13 @@ public class Member implements MemberCode {
     // 회원 상태 칼럼 추가 (2023-01-18)
     private String userStatus;                      // 이용가능한 상태, 정지상태, 탈퇴상태
 
+    // 회원 정보 수정일 추가 (2023-01-19)
+    private LocalDateTime udtDt;
+
+    // 우편번호, 주소, 상세 주소 칼럼 추가 (2023-01-19)
+    private String zipcode;
+    private String addr;
+    private String addrDetail;
+
+
 }
