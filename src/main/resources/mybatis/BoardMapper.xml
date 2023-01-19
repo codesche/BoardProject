@@ -54,4 +54,11 @@
       limit 30, 10 => pageIndex : 4
   -->
 
+  <!-- 게시판 조회수 -->
+  <update id="countVisit" parameterType="long">
+      update board
+            set count_visit = count_visit + 1
+            where post_number = #{post_number}
+  </update>
+
 </mapper>

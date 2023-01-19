@@ -26,6 +26,8 @@ public class BoardDTO {
     private LocalDateTime updateDt;
     private String content;
 
+    private Long countVisit;
+
     // 추가컬럼
     long totalCount;
     long seq;
@@ -39,6 +41,7 @@ public class BoardDTO {
                         .userId(board.getUserId())
                         .createDt(board.getCreateDt())
                         .updateDt(board.getUpdateDt())
+                        .countVisit(board.getCountVisit())
                         .build();
     }
 

@@ -12,4 +12,6 @@ public interface BoardMapper {
 
     List<BoardDTO> selectList(BoardParam parameter);
 
+    long countVisit(Long parameter);
+
 }

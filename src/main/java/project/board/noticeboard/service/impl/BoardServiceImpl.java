@@ -1,13 +1,9 @@
 package project.board.noticeboard.service.impl;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -121,6 +117,11 @@ public class BoardServiceImpl implements BoardService {
         Board board = optionalBoard.get();
 
         return BoardDTO.of(board);
+    }
+
+    @Override
+    public void countVisit(Long postNumber) {
+        boardMapper.countVisit(postNumber);
     }
 
 

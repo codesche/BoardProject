@@ -31,8 +31,5 @@ public interface BoardService {
 
     BoardDTO detail(Long postNumber);
 
-    /**
-     * 게시판 글 상세 정보
-     */
-//    BoardDTO detail(Long postNumber);
+    void countVisit(Long postNumber);
 }

@@ -8,10 +8,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import project.board.common.BaseController;
 import project.board.noticeboard.dto.BoardDTO;
+import project.board.noticeboard.entity.Board;
 import project.board.noticeboard.model.BoardInput;
 import project.board.noticeboard.model.BoardParam;
 import project.board.noticeboard.service.BoardService;
@@ -107,6 +110,7 @@ public class BoardController extends BaseController {
     public String detail(Model model, BoardParam parameter) {
 
         parameter.init();
+        boardService.countVisit(parameter.getPostNumber());
 
         BoardDTO board = boardService.detail(parameter.getPostNumber());
         model.addAttribute("board", board);
@@ -114,6 +118,5 @@ public class BoardController extends BaseController {
         return "board/detail";
 
     }
-
 
 }
