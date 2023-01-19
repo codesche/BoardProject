@@ -1,6 +1,7 @@
 package project.board.noticeboard.entity;
 
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,4 +28,8 @@ public class Board {
 
     @Lob
     private String content;
+
+    @Column(columnDefinition = "int default 0")
+    private Long countVisit;              // 조회수 칼럼 추가 (2023-01-20)
+
 }
