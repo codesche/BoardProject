@@ -21,12 +21,15 @@ import project.board.admin.mapper.MemberMapper;
 import project.board.admin.model.MemberParam;
 import project.board.component.MailComponents;
 import project.board.member.entity.Member;
+import project.board.member.entity.MemberCode;
 import project.board.member.exception.MemberNotEmailAuthException;
 import project.board.member.exception.MemberStopUserException;
+import project.board.member.model.ServiceResult;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
 import project.board.member.model.MemberInput;
 import project.board.member.model.ResetPasswordInput;
+import project.board.util.PasswordUtils;
 
 @RequiredArgsConstructor
 @Service
@@ -66,6 +69,9 @@ public class MemberServiceImpl implements MemberService {
             .emailAuthYn(false)
             .emailAuthKey(uuid)
             .userStatus(Member.MEMBER_STATUS_REQ)
+            .zipcode(parameter.getZipcode())
+            .addr(parameter.getAddr())
+            .addrDetail(parameter.getAddrDetail())
             .build();
 
         memberRepository.save(member);
@@ -247,12 +253,92 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = optionalMember.get();
 
-        String encPassowrd = BCrypt.hashpw(password, BCrypt.gensalt());
+        String encPassword = BCrypt.hashpw(password, BCrypt.gensalt());
 
-        member.setUserPassword(encPassowrd);
+        member.setUserPassword(encPassword);
         memberRepository.save(member);
 
         return true;
+    }
+
+    @Override
+    public ServiceResult updateMember(MemberInput parameter) {
+        String userId = parameter.getUserId();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            return new ServiceResult(false, "회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        member.setPhone(parameter.getPhone());
+        member.setUdtDt(LocalDateTime.of(now.getYear(), now.getMonth(),
+            now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()));
+        member.setZipcode(parameter.getZipcode());
+        member.setAddr(parameter.getAddr());
+        member.setAddrDetail(parameter.getAddrDetail());
+        memberRepository.save(member);
+
+        return new ServiceResult();
+    }
+
+    @Override
+    public ServiceResult updateMemberPassword(MemberInput parameter) {
+
+        String userId = parameter.getUserId();
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            return new ServiceResult(false, "회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        if (!PasswordUtils.equals(parameter.getUserPassword(), member.getUserPassword())) {
+            return new ServiceResult(false, "비밀번호가 일치하지 않습니다.");
+        }
+
+        String encPassword = PasswordUtils.encPassword(parameter.getNewPassword());
+        member.setUserPassword(encPassword);
+        memberRepository.save(member);
+
+        return new ServiceResult(true);
+    }
+
+    @Override
+    public ServiceResult withdraw(String userId, String userPassword) {
+
+        Optional<Member> optionalMember = memberRepository.findById(userId);
+        if (!optionalMember.isPresent()) {
+            return new ServiceResult(false, "회원 정보가 존재하지 않습니다.");
+        }
+
+        Member member = optionalMember.get();
+
+        if (!PasswordUtils.equals(userPassword, member.getUserPassword())) {
+            return new ServiceResult(false, "비밀번호가 일치하지 않습니다.");
+        }
+
+        member.setUserName("삭제회원");
+        member.setPhone("");
+        member.setUserPassword("");
+        member.setRegDt(null);
+        member.setUdtDt(null);
+        member.setEmailAuthYn(false);
+        member.setEmailAuthDt(null);
+        member.setEmailAuthKey("");
+        member.setResetPasswordKey("");
+        member.setResetPasswordKey(null);
+        member.setUserStatus(MemberCode.MEMBER_STATUS_WITHDRAW);
+        member.setZipcode("");
+        member.setAddr("");
+        member.setAddrDetail("");
+        memberRepository.save(member);
+
+        return new ServiceResult();
     }
 
     @Override

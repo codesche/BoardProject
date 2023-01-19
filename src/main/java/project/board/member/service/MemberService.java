@@ -6,6 +6,7 @@ import project.board.admin.dto.MemberDTO;
 import project.board.admin.model.MemberParam;
 import project.board.member.model.MemberInput;
 import project.board.member.model.ResetPasswordInput;
+import project.board.member.model.ServiceResult;
 
 public interface MemberService extends UserDetailsService {
 
@@ -45,7 +46,6 @@ public interface MemberService extends UserDetailsService {
     MemberDTO detail(String userId);
 
     /**
-     *
      * 회원 상태 변경
      */
     boolean updateStatus(String userId, String userStatus);
@@ -55,4 +55,18 @@ public interface MemberService extends UserDetailsService {
      */
     boolean updatePassword(String userId, String password);
 
+    /**
+     * 회원정보 수정
+     */
+    ServiceResult updateMember(MemberInput parameter);
+
+    /**
+     * 회원 정보 페이지내 비밀번호 변경 가능
+     */
+    ServiceResult updateMemberPassword(MemberInput parameter);
+
+    /**
+     * 회원 탈퇴
+     */
+    ServiceResult withdraw(String userId, String userPassword);
 }
