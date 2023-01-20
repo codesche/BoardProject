@@ -31,43 +31,8 @@
     <p class="lead">게시판을 관리하는 공간입니다.</p>
     <hr class="my-4">
     <p>JPA, SpringSecurity, mybatis를 활용하여 개발하였습니다.</p>
-    <a class="btn btn-primary btn-lg" href="https://github.com/codesche/BoardProject"
-       role="button">관리자 화면</a>
   </div>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand">SpringBoot 게시판</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/main">관리자 메인</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/member/list">회원 관리</a>
-        </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="/admin/board/list">게시글 관리</a>
-        </li>
-      </ul>
-    </div>
-
-    <ul class="dropdown">
-      <br>
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-              aria-expanded="false">
-        접속하기
-      </button>
-
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="/member/login">로그인</a>
-        <a class="dropdown-item" href="/member/logout">로그아웃</a>
-      </div>
-    </ul>
-  </nav>
+  <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>
 </body>
 </html>
