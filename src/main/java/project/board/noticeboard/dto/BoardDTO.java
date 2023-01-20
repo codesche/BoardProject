@@ -32,6 +32,17 @@ public class BoardDTO {
     long totalCount;
     long seq;
 
+    private String loginId;
+
+    public String getLoginId() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = (UserDetails)principal;
+        loginId = userDetails.getUsername();
+
+        return loginId;
+    }
+
+
     public static BoardDTO of(Board board) {
 
         return BoardDTO.builder()

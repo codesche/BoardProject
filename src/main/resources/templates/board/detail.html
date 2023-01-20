@@ -66,8 +66,10 @@
             </tbody>
           </table>
           <div>
-            <a href="/board/list" class="btn btn-dark">목록으로</a>
-            <a th:href="'edit?postNumber=' + ${board.postNumber}" class="btn btn-primary">글 수정</a>
+            <span><a href="/board/list" class="btn btn-dark">목록으로</a></span>
+            <span th:if="${board.userId} == ${board.getLoginId()} ">
+              <a th:href="'edit?postNumber=' + ${board.postNumber}" class="btn btn-primary">글 수정</a></span>
+            <span th:unless="${board.userId} != ${board.getLoginId()} "></span>
           </div>
         </form>
       </div>
