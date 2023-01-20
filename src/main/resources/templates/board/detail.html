@@ -26,84 +26,53 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand">SpringBoot 게시판</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <div th:replace="/fragments/layout.html :: fragment-nav"></div>
 
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">메인<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/board/list">게시판</a>
-      </li>
-    </ul>
-  </div>
-  <ul class="dropdown">
-    <br>
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
-            aria-expanded="false">
-      접속하기
-    </button>
+  <div class="board">
+    <div class="container" style="padding-top: 130px; padding-left: 230px;">
+      <div class="row">
+        <form method="post" enctype="multipart/form-data">
+          <table class="table table-striped"
+                 style="text-align: center; border: 1px solid #dddddd;">
+            <thead>
+            <tr>
+              <th colspan="2" style="background-color: #eeeeee; width: 787px; margin-left: auto;
+                    margin-right: auto; text-align: center;">게시판 글 보기</th>
 
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="/member/login">로그인</a>
-      <a class="dropdown-item" href="/member/register">회원가입</a>
-      <a class="dropdown-item" href="/member/info">회원정보</a>
-      <a class="dropdown-item" href="/member/logout">로그아웃</a>
-    </div>
-  </ul>
-</nav>
-
-<div class="board">
-  <div class="container" style="padding-top: 130px; padding-left: 230px;">
-    <div class="row">
-      <form method="post" enctype="multipart/form-data">
-        <table class="table table-striped"
-               style="text-align: center; border: 1px solid #dddddd;">
-          <thead>
-          <tr>
-            <th colspan="2" style="background-color: #eeeeee; width: 787px; margin-left: auto;
-                  margin-right: auto; text-align: center;">게시판 글 보기</th>
-
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>글 제목</td>
-              <td th:text="${board.title}">글 제목</td>
             </tr>
-            <tr>
-              <td>작성자</td>
-              <td th:text="${board.userId}">작성자</td>
-            </tr>
-            <tr>
-              <td>작성일자</td>
-              <td th:text="${board.updateDtText}">작성일자</td>
-            </tr>
-            <tr>
-              <td>조회수</td>
-              <td th:text="${board.countVisit}">조회수</td>
-            </tr>
-            <tr>
-              <td>내용</td>
-              <td th:text="${board.content}"
-                  colspan="2" style="min-height:30px; text-align: left;">내용</td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-          <a href="/board/list" class="btn btn-dark">목록으로</a>
-          <a th:href="'edit?postNumber=' + ${board.postNumber}" class="btn btn-primary">글 수정</a>
-        </div>
-      </form>
+            </thead>
+            <tbody>
+              <tr>
+                <td>글 제목</td>
+                <td th:text="${board.title}">글 제목</td>
+              </tr>
+              <tr>
+                <td>작성자</td>
+                <td th:text="${board.userId}">작성자</td>
+              </tr>
+              <tr>
+                <td>작성일자</td>
+                <td th:text="${board.updateDtText}">작성일자</td>
+              </tr>
+              <tr>
+                <td>조회수</td>
+                <td th:text="${board.countVisit}">조회수</td>
+              </tr>
+              <tr>
+                <td>내용</td>
+                <td th:text="${board.content}"
+                    colspan="2" style="min-height:30px; text-align: left;">내용</td>
+              </tr>
+            </tbody>
+          </table>
+          <div>
+            <a href="/board/list" class="btn btn-dark">목록으로</a>
+            <a th:href="'edit?postNumber=' + ${board.postNumber}" class="btn btn-primary">글 수정</a>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
 </body>
 </html>
