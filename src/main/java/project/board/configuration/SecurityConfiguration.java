@@ -50,16 +50,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**")
                 .hasAuthority("ROLE_ADMIN");
 
+//        http.authorizeRequests()
+//                .mvcMatchers(
+//                    "/css/**",
+//                    "/scripts/**",
+//                    "/plugin/**",
+//                    "/fonts/**",
+//                    "/docs/**",
+//                    "/webjars/**",
+//                    "/custom.css",
+//                    "/starter-template.css").permitAll();
+
         http.authorizeRequests()
-                .mvcMatchers(
-                    "/css/**",
-                    "/scripts/**",
-                    "/plugin/**",
-                    "/fonts/**",
-                    "/docs/**",
-                    "/webjars/**",
-                    "/custom.css",
-                    "/starter-template.css").permitAll();
+            .antMatchers(
+                "/css/**",
+                "/scripts/**",
+                "/plugin/**",
+                "/fonts/**",
+                "/docs/**",
+                "/webjars/**",
+                "/custom.css",
+                "/starter-template.css").permitAll();
 
 
         http.formLogin()
