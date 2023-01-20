@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.parameters.P;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import project.board.BoardApplication;
 import project.board.admin.dto.MemberDTO;
 import project.board.admin.mapper.MemberMapper;
 import project.board.admin.model.MemberParam;
@@ -42,6 +45,8 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberMapper memberMapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(BoardApplication.class);
+
     /**
      * 회원 가입
      */
@@ -54,6 +59,8 @@ public class MemberServiceImpl implements MemberService {
             // 현재 userId에 해당하는 데이터 존재
             return false;
         }
+
+        logger.info("=== register start ===");
 
         String encPassword = BCrypt.hashpw(parameter.getUserPassword(), BCrypt.gensalt());
         String uuid = UUID.randomUUID().toString();
@@ -75,6 +82,8 @@ public class MemberServiceImpl implements MemberService {
             .build();
 
         memberRepository.save(member);
+
+        logger.info("=== register end ===");
 
         String email = parameter.getUserEmail();
         String subject = "SpringBoot 게시판 사이트 가입을 축하드립니다. ";
@@ -231,6 +240,8 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean updateStatus(String userId, String userStatus) {
 
+        logger.info("=== updateStatus start ===");
+
         Optional<Member> optionalMember = memberRepository.findById(userId);
         if (!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
@@ -241,11 +252,14 @@ public class MemberServiceImpl implements MemberService {
         member.setUserStatus(userStatus);
         memberRepository.save(member);
 
+        logger.info("=== updateStatus end ===");
+
         return true;
     }
 
     @Override
     public boolean updatePassword(String userId, String password) {
+
         Optional<Member> optionalMember = memberRepository.findById(userId);
         if (!optionalMember.isPresent()) {
             throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
@@ -263,6 +277,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ServiceResult updateMember(MemberInput parameter) {
+
+        logger.info("=== updateMember start ===");
+
         String userId = parameter.getUserId();
 
         LocalDateTime now = LocalDateTime.now();
@@ -282,11 +299,15 @@ public class MemberServiceImpl implements MemberService {
         member.setAddrDetail(parameter.getAddrDetail());
         memberRepository.save(member);
 
+        logger.info("=== updateMember end ===");
+
         return new ServiceResult();
     }
 
     @Override
     public ServiceResult updateMemberPassword(MemberInput parameter) {
+
+        logger.info("=== updateMemberPassword start ===");
 
         String userId = parameter.getUserId();
 
@@ -305,11 +326,15 @@ public class MemberServiceImpl implements MemberService {
         member.setUserPassword(encPassword);
         memberRepository.save(member);
 
+        logger.info("=== updateMemberPassword end ===");
+
         return new ServiceResult(true);
     }
 
     @Override
     public ServiceResult withdraw(String userId, String userPassword) {
+
+        logger.info("=== withdraw start ===");
 
         Optional<Member> optionalMember = memberRepository.findById(userId);
         if (!optionalMember.isPresent()) {
@@ -337,6 +362,8 @@ public class MemberServiceImpl implements MemberService {
         member.setAddr("");
         member.setAddrDetail("");
         memberRepository.save(member);
+
+        logger.info("=== withdraw end ===");
 
         return new ServiceResult();
     }

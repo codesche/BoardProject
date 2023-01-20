@@ -4,10 +4,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import project.board.BoardApplication;
 import project.board.noticeboard.dto.BoardDTO;
 import project.board.noticeboard.entity.Board;
 import project.board.noticeboard.mapper.BoardMapper;
@@ -24,8 +27,12 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardMapper boardMapper;
 
+    private static final Logger logger = LoggerFactory.getLogger(BoardApplication.class);
+
     @Override
     public List<BoardDTO> list(BoardParam parameter) {
+
+        logger.info("=== 게시판 글 조회(Start) ===");
 
         long totalCount = boardMapper.selectListCount(parameter);
         List<BoardDTO> list = boardMapper.selectList(parameter);
@@ -39,6 +46,8 @@ public class BoardServiceImpl implements BoardService {
             }
         }
 
+        logger.info("=== 게시판 글 조회(End) ===");
+
         return list;
     }
 
@@ -49,6 +58,8 @@ public class BoardServiceImpl implements BoardService {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDetails userDetails = (UserDetails)principal;
         LocalDateTime now = LocalDateTime.now();
+
+        logger.info("=== 게시판 글 추가(Start) ===");
 
         Board board = Board.builder()
             .postNumber(parameter.getPostNumber())
@@ -63,6 +74,8 @@ public class BoardServiceImpl implements BoardService {
 
         boardRepository.save(board);
 
+        logger.info("=== 게시판 글 추가(End) ===");
+
         return true;
     }
 
@@ -72,6 +85,8 @@ public class BoardServiceImpl implements BoardService {
         UserDetails userDetails = (UserDetails)principal;
 
         LocalDateTime now = LocalDateTime.now();
+
+        logger.info("=== 게시판 글 수정(Start) ===");
 
         Optional<Board> optionalBoard = boardRepository.findById(parameter.getPostNumber());
         if (optionalBoard.isEmpty()) {
@@ -88,6 +103,8 @@ public class BoardServiceImpl implements BoardService {
         board.setContent(parameter.getContent());
 
         boardRepository.save(board);
+
+        logger.info("=== 게시판 글 수정(End) ===");
 
         return true;
     }
