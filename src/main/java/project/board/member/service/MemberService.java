@@ -2,8 +2,11 @@ package project.board.member.service;
 
 import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import project.board.admin.dto.LoginHistoryDTO;
 import project.board.admin.dto.MemberDTO;
 import project.board.admin.model.MemberParam;
+import project.board.member.model.LoginHistoryInput;
 import project.board.member.model.MemberInput;
 import project.board.member.model.ResetPasswordInput;
 import project.board.member.model.ServiceResult;
@@ -70,4 +73,14 @@ public interface MemberService extends UserDetailsService {
      */
     ServiceResult withdraw(String userId, String userPassword);
 
+    /**
+     * 로그인 기록 남겨주는 로직 (관리자에서만 사용 가능)
+     */
+    List<LoginHistoryDTO> loginHistory(String userId);
+
+
+    /**
+     * 로그인 시 history 기록하고 멤버별 최근 로그인 일자 업데이트하는 로직
+     */
+    boolean recordLoginHistory(LoginHistoryInput loginHistoryInput);
 }

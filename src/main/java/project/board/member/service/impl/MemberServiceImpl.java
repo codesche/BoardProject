@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,15 +18,19 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import project.board.BoardApplication;
+import project.board.admin.dto.LoginHistoryDTO;
 import project.board.admin.dto.MemberDTO;
 import project.board.admin.mapper.MemberMapper;
 import project.board.admin.model.MemberParam;
 import project.board.component.MailComponents;
+import project.board.member.entity.LoginHistory;
 import project.board.member.entity.Member;
 import project.board.member.entity.MemberCode;
 import project.board.member.exception.MemberNotEmailAuthException;
 import project.board.member.exception.MemberStopUserException;
+import project.board.member.model.LoginHistoryInput;
 import project.board.member.model.ServiceResult;
+import project.board.member.repository.LoginHistoryRepository;
 import project.board.member.repository.MemberRepository;
 import project.board.member.service.MemberService;
 import project.board.member.model.MemberInput;
@@ -44,6 +47,8 @@ public class MemberServiceImpl implements MemberService {
     private final MailComponents mailComponents;
 
     private final MemberMapper memberMapper;
+
+    private final LoginHistoryRepository loginHistoryRepository;
 
     private static final Logger logger = LoggerFactory.getLogger(BoardApplication.class);
 
@@ -366,6 +371,51 @@ public class MemberServiceImpl implements MemberService {
         logger.info("=== withdraw end ===");
 
         return new ServiceResult();
+    }
+
+    @Override
+    public List<LoginHistoryDTO> loginHistory(String userId) {
+
+        List<LoginHistoryDTO> loginHistoryList = new ArrayList<>();
+        List<LoginHistory> loginHistories =
+            loginHistoryRepository.findLoginHistoriesByUserId(userId);
+
+        long count = loginHistories.size();
+        for (LoginHistory x : loginHistories) {
+            LoginHistoryDTO dto = LoginHistoryDTO.of(x);
+            dto.setSeq(count);
+            loginHistoryList.add(dto);
+            count--;
+        }
+
+        return loginHistoryList;
+    }
+
+
+    @Override
+    public boolean recordLoginHistory(LoginHistoryInput parameter) throws UsernameNotFoundException {
+
+        Optional<Member> optionalMember = memberRepository.findById(parameter.getUserId());
+        if (!optionalMember.isPresent()) {
+            throw new UsernameNotFoundException("회원 정보가 존재하지 않습니다.");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+
+        LoginHistory loginHistory = LoginHistory.builder()
+            .userId(parameter.getUserId())
+            .clientIp(parameter.getClientIp())
+            .userAgent(parameter.getUserAgent())
+            .loginDt(now)
+            .build();
+
+        loginHistoryRepository.save(loginHistory);
+
+        Member member = optionalMember.get();
+        member.setLastLoginDt(now);
+        memberRepository.save(member);
+
+        return true;
     }
 
     @Override

@@ -41,6 +41,8 @@ public class MemberDTO {
     private String addr;
     private String addrDetail;
 
+    LocalDateTime lastLoginDt;
+
     public static MemberDTO of(Member member) {
         return MemberDTO.builder()
             .userId(member.getUserId())
@@ -62,6 +64,8 @@ public class MemberDTO {
             .addr(member.getAddr())
             .addrDetail(member.getAddrDetail())
 
+            .lastLoginDt(member.getLastLoginDt())
+
             .build();
     }
 
@@ -74,6 +78,11 @@ public class MemberDTO {
     public String getUdtDtText() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return udtDt != null ? this.udtDt.format(formatter) : "";
+    }
+
+    public String getLastLoginDtText() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return lastLoginDt != null ? this.lastLoginDt.format(formatter) : "";
     }
 
 

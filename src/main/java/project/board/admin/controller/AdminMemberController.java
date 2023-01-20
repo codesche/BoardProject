@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import project.board.admin.dto.LoginHistoryDTO;
 import project.board.admin.dto.MemberDTO;
 import project.board.admin.model.MemberStatusInput;
 import project.board.admin.model.MemberParam;
@@ -49,6 +50,9 @@ public class AdminMemberController extends BaseController {
 
         MemberDTO member = memberservice.detail(parameter.getUserId());
         model.addAttribute("member", member);
+
+        List<LoginHistoryDTO> histories = memberservice.loginHistory(parameter.getUserId());
+        model.addAttribute("histories", histories);
 
         return "admin/member/detail";
     }

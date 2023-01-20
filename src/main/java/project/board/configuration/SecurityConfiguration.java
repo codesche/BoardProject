@@ -28,9 +28,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    UserAuthenticationSuccessHandler getSuccessHandler () {
+        return new UserAuthenticationSuccessHandler(memberService);
+    }
+
+    @Bean
     UserAuthenticationFailureHandler getFailureHandler() {
         return new UserAuthenticationFailureHandler();
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -50,17 +56,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**")
                 .hasAuthority("ROLE_ADMIN");
 
-//        http.authorizeRequests()
-//                .mvcMatchers(
-//                    "/css/**",
-//                    "/scripts/**",
-//                    "/plugin/**",
-//                    "/fonts/**",
-//                    "/docs/**",
-//                    "/webjars/**",
-//                    "/custom.css",
-//                    "/starter-template.css").permitAll();
-
         http.authorizeRequests()
             .antMatchers(
                 "/css/**",
@@ -76,6 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.formLogin()
             .loginPage("/member/login")
             .failureHandler(getFailureHandler())
+            .successHandler(getSuccessHandler())
             .permitAll();
 
         http.logout()

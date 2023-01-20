@@ -26,7 +26,6 @@
 </head>
 
 <body>
-
   <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>
 
   <div class="detail">
@@ -102,12 +101,46 @@
                </tr>
           </tbody>
         </table>
-        <div>
-          <a href="/board/list" class="btn btn-primary">목록으로</a>
-        </div>
       </div>
     </div>
   </div>
+
+  <div class="container" style="padding-top: 5px; padding-left: 200px; padding-right:100px;">
+    <div class="row">
+      <table class="table table-striped"
+             style="text-align: center; border: 1px solid #dddddd;">
+        <thead>
+        <tr>
+          <th colspan="4" style="background-color: #eeeeee; width: 787px; margin-left: auto;
+                  margin-right: auto; text-align: center;">로그인 히스토리 내역</th>
+        </tr>
+        </thead>
+        <tbody>
+          <thead>
+          <tr>
+            <th>NO</th>
+            <th>
+              로그인 일자
+            </th>
+            <th>
+              접속 IP
+            </th>
+            <th>
+              접속 UserAgent
+            </th>
+          </tr>
+          </thead>
+          <tr th:each="x : ${histories}">
+            <td th:text="${x.seq}">1</td>
+            <td th:text="${x.lastLoginDtText}">2021-12-31</td>
+            <td th:text="${x.clientIp}">127.0.0.1</td>
+            <td th:text="${x.userAgent}">Mozila...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 
 </body>
 </html>
