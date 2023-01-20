@@ -126,12 +126,16 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDTO detail(Long postNumber) {
 
+        logger.info("=== 게시판 글 상세 조회(Start) ===");
+
         Optional<Board> optionalBoard = boardRepository.findById(postNumber);
         if (optionalBoard.isEmpty()) {
             return null;
         }
 
         Board board = optionalBoard.get();
+
+        logger.info("=== 게시판 글 상세 조회(End) ===");
 
         return BoardDTO.of(board);
     }
