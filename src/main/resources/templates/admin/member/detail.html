@@ -26,7 +26,41 @@
 </head>
 
 <body>
-  <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>
+<!--  <div th:replace="/fragments/layout.html :: fragment-admin-nav"></div>-->
+  <nav th:fragment="fragment-admin-nav" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand">SpringBoot 게시판</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault_admin">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/main">관리자 메인</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/admin/member/list">회원 관리</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/board/list">게시판</a>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="dropdown">
+      <br>
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+              aria-expanded="false">
+        접속하기
+      </button>
+
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="/member/login">로그인</a>
+        <a class="dropdown-item" href="/member/logout">로그아웃</a>
+      </div>
+    </ul>
+  </nav>
 
   <div class="detail">
     <div class="container" style="padding-top: 130px; padding-left: 200px; padding-right:100px;">
