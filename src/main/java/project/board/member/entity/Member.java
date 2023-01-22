@@ -35,7 +35,7 @@ public class Member implements MemberCode {
 
     // 패스워드 초기화 칼럼 추가 (2023-01-09)
     private String resetPasswordKey;                // 패스워드 초기화
-    private LocalDateTime resetPasswordLimitDt;     // 패스워드 초기화 가능 날짜
+    private LocalDateTime resetPasswordLimitDt;     // 패스워드 초기화 가능 기간
 
     // 관리자 승인 여부 칼럼 추가 (2023-01-18)
     private boolean adminYn;
