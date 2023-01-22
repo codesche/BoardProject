@@ -1,5 +1,6 @@
 package project.board.admin.controller;
 
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class AdminMemberController extends BaseController {
     private final MemberService memberservice;
 
     @GetMapping("/admin/member/list")
+    @ApiOperation(value = "관리자 - 회원 관리 목록 호출")
     public String list(Model model, MemberParam parameter) {
 
         parameter.init();
@@ -44,6 +46,7 @@ public class AdminMemberController extends BaseController {
     }
 
     @GetMapping("/admin/member/detail")
+    @ApiOperation(value = "관리자 - 회원 관리 상세 목록 호출")
     public String detail(Model model, MemberParam parameter) {
 
         parameter.init();
@@ -58,6 +61,7 @@ public class AdminMemberController extends BaseController {
     }
 
     @PostMapping("/admin/member/status")
+    @ApiOperation(value = "관리자 - 회원 상태 변경")
     public String status(Model model, MemberStatusInput parameter) {
         boolean result = memberservice.updateStatus(parameter.getUserId(), parameter.getUserStatus());
 
@@ -65,6 +69,7 @@ public class AdminMemberController extends BaseController {
     }
 
     @PostMapping("/admin/member/password")
+    @ApiOperation(value = "관리자 - 비밀번호 변경")
     public String password(MemberStatusInput parameter) {
         boolean result = memberservice.updatePassword(parameter.getUserId(), parameter.getPassword());
 

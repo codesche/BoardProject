@@ -1,5 +1,6 @@
 package project.board.noticeboard.controller;
 
+import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class BoardController extends BaseController {
 
     // 게시판 목록 조회
     @GetMapping("/board/list")
+    @ApiOperation(value = "게시판 목록 조회")
     public String list(Model model, BoardParam parameter) {
 
         parameter.init();
@@ -49,7 +51,9 @@ public class BoardController extends BaseController {
         return "board/list";
     }
 
+    // 게시글 작성
     @GetMapping(value = {"/board/write", "/board/edit"})
+    @ApiOperation(value = "게시판 글 작성(Get)")
     public String write(Model model, HttpServletRequest request, BoardInput parameter) {
 
         boolean editMode = request.getRequestURI().contains("/edit");
@@ -73,6 +77,7 @@ public class BoardController extends BaseController {
     }
 
     @PostMapping(value = {"/board/write", "/board/edit"})
+    @ApiOperation(value = "게시판 글 작성(Post)")
     public String writeSubmit(Model model, HttpServletRequest request, BoardInput parameter) {
 
         boolean editMode = request.getRequestURI().contains("/edit");
@@ -97,16 +102,16 @@ public class BoardController extends BaseController {
 
     // 게시글 삭제
     @PostMapping("/board/write/delete")
+    @ApiOperation(value = "게시판 글 삭제")
     public String del(Model model, BoardInput parameter) {
         boolean result = boardService.del(parameter.getPostNumber());
 
         return "redirect:/board/list";
     }
 
-    /**
-     * 게시글 상세 조회
-     */
+    // 게시글 상세 조회
     @GetMapping("/board/detail")
+    @ApiOperation(value = "게시판 글 상세 조회")
     public String detail(Model model, BoardParam parameter) {
 
         parameter.init();

@@ -1,5 +1,6 @@
 package project.board.member.controller;
 
+import io.swagger.annotations.ApiOperation;
 import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class MemberController extends BaseController {
 
     // 로그인
     @RequestMapping("/member/login")
+    @ApiOperation("로그인")
     public String login() {
 
         return "member/login";
@@ -33,6 +35,7 @@ public class MemberController extends BaseController {
 
     // 회원가입
     @GetMapping("/member/register")
+    @ApiOperation(value = "회원가입")
     public String register() {
         return "member/register";
     }
@@ -40,6 +43,7 @@ public class MemberController extends BaseController {
     // request      WEB -> SERVER
     // response     SERVER -> WEB
     @PostMapping("/member/register")
+    @ApiOperation(value = "회원가입")
     public String registerSubmit(Model model, HttpServletRequest request
         , HttpServletResponse response
         , MemberInput parameter) {
@@ -52,6 +56,7 @@ public class MemberController extends BaseController {
 
     // 메일 인증
     @GetMapping("/member/email-auth")
+    @ApiOperation(value = "회원 가입 후 메일 인증")
     public String emailAuth(Model model, HttpServletRequest request) {
 
         String uuid = request.getParameter("id");
@@ -65,6 +70,7 @@ public class MemberController extends BaseController {
 
     // 회원 정보
     @GetMapping("/member/info")
+    @ApiOperation(value = "사용자 - 회원 상세 정보 확인")
     public String memberInfo(Model model, Principal principal) {
 
         String userId = principal.getName();
@@ -78,6 +84,7 @@ public class MemberController extends BaseController {
 
     // 회원 정보 수정
     @PostMapping("/member/info")
+    @ApiOperation(value = "사용자 - 회원 상세 정보 확인")
     public String memberInfoSubmit(Model model, MemberInput parameter, Principal principal) {
 
         String userId = principal.getName();
@@ -95,12 +102,14 @@ public class MemberController extends BaseController {
 
     // 비밀번호 찾기
     @GetMapping("/member/find/password")
+    @ApiOperation(value = "비밀번호 찾기")
     public String findPassword() {
         return "member/find_password";
     }
 
     // 비밀번호 찾기 요청
     @PostMapping("/member/find/password")
+    @ApiOperation(value = "비밀번호 찾기")
     public String findPasswordSubmit(Model model, ResetPasswordInput parameter) {
 
         boolean result = false;
@@ -119,6 +128,7 @@ public class MemberController extends BaseController {
 
     // 비밀번호 초기화
     @GetMapping("/member/reset/password")
+    @ApiOperation(value = "비밀번호 초기화")
     public String resetPassword(Model model, HttpServletRequest request) {
         String uuid = request.getParameter("id");
 
@@ -132,6 +142,7 @@ public class MemberController extends BaseController {
 
     // 비밀번호 초기화 요청
     @PostMapping("/member/reset/password")
+    @ApiOperation(value = "비밀번호 초기화")
     public String resetPasswordSubmit(Model model, ResetPasswordInput parameter) {
 
         boolean result = false;
@@ -149,6 +160,7 @@ public class MemberController extends BaseController {
 
     // 회원 정보 메뉴에서 비밀번호 변경
     @GetMapping("/member/password")
+    @ApiOperation(value = "비밀번호 초기화")
     public String memberPassword(Model model, Principal principal) {
 
         String userId = principal.getName();
@@ -160,6 +172,7 @@ public class MemberController extends BaseController {
     }
 
     @PostMapping("/member/password")
+    @ApiOperation(value = "비밀번호 초기화")
     public String memberPasswordSubmit(Model model, MemberInput parameter, Principal principal) {
 
         String userId = principal.getName();
@@ -175,6 +188,7 @@ public class MemberController extends BaseController {
     }
 
     @GetMapping("/member/withdraw")
+    @ApiOperation(value = "회원 탈퇴")
     public String memberWithDraw(Model model) {
 
         return "member/withdraw";
@@ -182,6 +196,7 @@ public class MemberController extends BaseController {
     }
 
     @PostMapping("/member/withdraw")
+    @ApiOperation(value = "회원 탈퇴")
     public String memberWithdrawSubmit(Model model, MemberInput parameter, Principal principal) {
 
         String userId = principal.getName();
@@ -197,6 +212,7 @@ public class MemberController extends BaseController {
 
 
     @GetMapping("/member/list")
+    @ApiOperation(value = "회원 목록 조회")
     public String list(Model model, MemberParam memberParam) {
 
         memberParam.init();
