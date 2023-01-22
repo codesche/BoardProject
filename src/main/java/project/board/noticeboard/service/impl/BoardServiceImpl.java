@@ -70,6 +70,7 @@ public class BoardServiceImpl implements BoardService {
                 now.getDayOfMonth(), now.getHour(), now.getMinute(), now.getSecond()))
             .content(parameter.getContent())
             .userId(userDetails.getUsername())
+            .countVisit(0L)
             .build();
 
         boardRepository.save(board);
