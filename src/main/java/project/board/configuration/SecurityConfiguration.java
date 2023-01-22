@@ -67,7 +67,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/custom.css",
                 "/starter-template.css").permitAll();
 
-
         http.formLogin()
             .loginPage("/member/login")
             .failureHandler(getFailureHandler())
@@ -83,7 +82,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .accessDeniedPage("/error/denied");
 
         super.configure(http);
-
     }
 
     // css 적용
