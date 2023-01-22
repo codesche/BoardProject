@@ -24,9 +24,10 @@
 - **DBMS : MySQL**
 - **Java Version : Java 11**
 - **IDE : Intellij IDEA 2022.2.3 (Ultimate Edition)**
-- **etc : Thymeleaf, BootStrap, Ajax**
-- **배포 : AWS EC2, RDS**
-- **persistance framework : mybatis**
+- **etc : Thymeleaf, BootStrap, Ajax
+- **Terminal : putty, Git Bash**
+- **배포 : AWS EC2, RDS, filezilla**
+- **ORM : mybatis**
 
 ## 핵심 API 정리 
 ![image](https://user-images.githubusercontent.com/110509654/213930406-fd5ad202-0150-458f-984a-0f45a9bb5945.png)
@@ -74,4 +75,9 @@
 - 관리자는 회원의 회원 상태와 비밀번호를 변경할 수 있음
 
 => 회원상태 유형 - **ING**: 활성화, **STOP**: 정지, **탈퇴**: WITHDRAW
+
+**8. 배포**
+- AWS에서 MySQL RDS 생성 후 EC2와 연동
+- Elastic IP Address 생성
+- filezila 통해 build한 파일을 Elastic IP와 연동된 Amazon EC2로 전송하여 배포 작업 진행
 
