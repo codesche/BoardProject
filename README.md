@@ -5,21 +5,24 @@
 - **SpringBoot를 활용한 게시판 프로젝트**
 
 ## **프로젝트 구조**
-![image](https://user-images.githubusercontent.com/110509654/209464571-2bbabb3d-717e-4f0e-91ab-e8715f7f8c48.png)
+![image](https://user-images.githubusercontent.com/110509654/213926327-1607e20d-ac0b-45bd-8919-fba04a611c24.png)
+
 
 ## **ERD**
-![image](https://user-images.githubusercontent.com/110509654/209921475-02d77874-8fec-401e-af9f-b293b3f8b0f9.png)
+![image](https://user-images.githubusercontent.com/110509654/213927600-4503b28d-fb65-4997-97e4-675a3fb837d7.png)
 
-- MEMBER : 회원 테이블
-- BORAD : 게시판 테이블 (Board -> BOARD)
+
+- member : 회원 테이블
+- board : 게시판 테이블
+- login_history : 사용자 접속 내역
 
 ## 사용 기술 스택
 - **Language : Java, HTML, CSS, JavaScript**
-- **DBMS : MySQL (Amazon RDS 활용)**
+- **DBMS : MySQL**
 - **Java Version : Java 11**
 - **IDE : Intellij IDEA 2022.2.3 (Ultimate Edition)**
 - **etc : Thymeleaf, BootStrap, MyBatis**
-- **배포 : AWS**
+- **배포 : AWS EC2, RDS**
 
 ## 프로젝트 기능
 
