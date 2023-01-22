@@ -61,10 +61,11 @@
               <tr>
                 <td>내용</td>
                 <td th:text="${board.content}"
-                    colspan="2" style="min-height:30px; text-align: left;">내용</td>
+                    colspan="2" style="min-height:30px; text-align: center;">내용</td>
               </tr>
             </tbody>
           </table>
+          <p></p>
           <div>
             <span><a href="/board/list" class="btn btn-dark">목록으로</a></span>
             <span th:if="${board.userId} == ${board.getLoginId()} ">
