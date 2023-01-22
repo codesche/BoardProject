@@ -24,9 +24,9 @@
 - **DBMS : MySQL**
 - **Java Version : Java 11**
 - **IDE : Intellij IDEA 2022.2.3 (Ultimate Edition)**
-- **etc : Thymeleaf, BootStrap, Ajax
+- **etc : Thymeleaf, BootStrap, Ajax**
 - **Terminal : putty, Git Bash**
-- **배포 : AWS EC2, RDS, filezilla**
+- **release : AWS EC2, RDS, filezilla**
 - **ORM : mybatis**
 
 ## 핵심 API 정리 
