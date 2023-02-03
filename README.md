@@ -1,4 +1,4 @@
-# 게시판 프로젝트 (first project)
+# ShortBoard(모두의 기록)
 
 ## **프로젝트 주제**
 
